@@ -8,11 +8,10 @@
             <p><span>Titolo:</span> {{title}}</p>
             <p><span>Titolo originale:</span> {{originalTitle}}</p>
             <p><span>Lingua: </span><lang-flag :iso="lang" :squared="false"/></p>
-            <p><span>Voto:</span> {{vote}}</p>
+            <p><span>Voto:</span>{{newVote(vote)}}</p>
             <p v-if="!overview"><span>Overview:</span> Descrizione non disponibile</p>
             <p v-else><span>Overview:</span> {{overview}}</p>
         </div>
-        
     </div>
 </template>
 
@@ -36,13 +35,35 @@ export default {
         background: String,
         lang: String,
     },
+    methods: {
+        newVote(vote){
+            return Math.round((vote * 5 / 10))
+        }
+    },
     
 }
 </script>
 
 <style lang="scss" scoped>
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: grey;
+    border-radius: 10px;
+}
+
 .card-container{
     min-width: 225px;
+    max-width: 225px;
     margin: 10px 15px 15px 0;
     cursor: pointer;
     height: 320px;
@@ -80,6 +101,10 @@ export default {
             
             span{
                 font-weight: bold;
+            }
+
+            .star{
+                color: goldenrod;
             }
         }
     }

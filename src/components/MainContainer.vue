@@ -15,7 +15,6 @@
         </div>
 
         <h1>Serie TV:</h1>
-
         <div class="row">
             <card-box 
                 v-for="serie in seriesList"
@@ -46,11 +45,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 .container{
     min-height: calc(100vh - 50px);
     width: 1200px;
     margin: 0 auto;
     padding: 15px 0;
+    color: white;
 
     .row{
         display: flex;
@@ -59,7 +60,7 @@ export default {
         margin-bottom: 15px;
 
         &:hover{
-            overflow: auto;
+            overflow: scroll;
             overflow-y: hidden;
         }
     }

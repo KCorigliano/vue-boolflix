@@ -1,6 +1,14 @@
 <template>
     <div class="header">
-        <h1>Boolflix</h1>
+        <div>
+            <h1>Boolflix</h1>
+            <p>Home</p>
+            <p>Serie TV</p>
+            <p>Film</p>
+            <p>Originali</p>
+            <p>Aggiunti di recente</p>
+            <p>La mia lista</p>
+        </div>
         <div>
             <input type="text" v-model="filmTitle" placeholder="Cerca un film" @keyup.enter="searchFilm">
             <button @click="searchFilm">Search</button>
@@ -25,7 +33,6 @@ export default {
 
 <style lang="scss" scoped>
 .header{
-    background-color: black;
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -33,14 +40,30 @@ export default {
     padding: 0 15px;
     height: 50px;
 
-    h1{
-        color: red;
-        text-transform: uppercase;
+    div:first-child{
+        display: flex;
+        align-items: center;
+
+        h1{
+            color: red;
+            text-transform: uppercase;
+            margin-right: 50px;
+        }
+    
+        p{
+            color: white;
+            margin-right: 30px;
+
+            &:hover{
+                cursor: pointer;
+                color: red;
+            }
+        }
     }
 
     div{
         input{
-            margin-right: 15px;
+            margin: 0 15px;
         }
 
         button{
