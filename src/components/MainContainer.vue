@@ -46,12 +46,14 @@ export default {
 
 <style lang="scss" scoped>
 
+
 .container{
     min-height: calc(100vh - 50px);
-    width: 1200px;
+    width: 100%;
     margin: 0 auto;
-    padding: 15px 0;
+    padding: 15px 50px;
     color: white;
+    
 
     .row{
         display: flex;
@@ -64,5 +66,6 @@ export default {
             overflow-y: hidden;
         }
     }
+    
 }
 </style>

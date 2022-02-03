@@ -64,7 +64,7 @@ export default {
 .card-container{
     min-width: 225px;
     max-width: 225px;
-    margin: 10px 15px 15px 0;
+    margin: 10px 5px 15px 0;
     cursor: pointer;
     height: 320px;
 
@@ -76,7 +76,7 @@ export default {
         p{
             background-color: black;
             color: white;
-            font-size: 25px;
+            font-size: 23px;
             height: 320px;
             padding: 0 12px;
         }
