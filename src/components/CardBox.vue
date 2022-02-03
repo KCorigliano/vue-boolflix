@@ -7,7 +7,7 @@
         <div class="text" v-show="hover">
             <p><span>Titolo:</span> {{title}}</p>
             <p><span>Titolo originale:</span> {{originalTitle}}</p>
-            <p><span>Lingua:</span> {{lang}}</p>
+            <p><span>Lingua: </span><lang-flag :iso="lang" :squared="false"/></p>
             <p><span>Voto:</span> {{vote}}</p>
             <p v-if="!overview"><span>Overview:</span> Descrizione non disponibile</p>
             <p v-else><span>Overview:</span> {{overview}}</p>
@@ -17,7 +17,12 @@
 </template>
 
 <script>
+import LangFlag from 'vue-lang-code-flags';
+
 export default {
+    components:{
+        LangFlag,
+    },
     data() {
         return {
             hover: false,
@@ -44,7 +49,6 @@ export default {
 
     .background{
         min-height: 320px;
-        z-index: 1000;
         text-align: center;
         line-height: 320px;
         
@@ -69,11 +73,11 @@ export default {
         background-color: black;
         border: 2px solid white;
         height: 320px;
-        overflow: auto;
+        overflow-y: auto;
 
         p{
             margin-bottom: 15px;
-
+            
             span{
                 font-weight: bold;
             }
