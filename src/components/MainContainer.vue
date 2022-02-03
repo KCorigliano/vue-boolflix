@@ -1,11 +1,14 @@
 <template>
     <div class="container">
         <card-box 
-            :title="filmList[0].name" 
-            :originalTitle="filmList[0].original_name" 
-            :vote="filmList[0].vote_average" 
-            :overview="filmList[0].overview"
-            :background="filmList[0].poster_path" />
+            v-for="(film, index) in filmList"
+            :title="film.name" 
+            :originalTitle="film.original_name" 
+            :lang="film.original_language"
+            :vote="film.vote_average" 
+            :overview="film.overview"
+            :background="film.poster_path" 
+            :key="index"/>
     </div>
 </template>
 
@@ -28,5 +31,7 @@ export default {
     width: 1200px;
     margin: 0 auto;
     padding: 50px 25px;
+    display: flex;
+    flex-wrap: wrap;
 }
 </style>

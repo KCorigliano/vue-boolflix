@@ -2,7 +2,7 @@
     <div class="header">
         <h1>Boolflix</h1>
         <div>
-            <input type="text" v-model="filmTitle" placeholder="Cerca un film">
+            <input type="text" v-model="filmTitle" placeholder="Cerca un film" @keyup.enter="searchFilm">
             <button @click="searchFilm">Search</button>
         </div>
     </div>
@@ -41,6 +41,10 @@ export default {
     div{
         input{
             margin-right: 15px;
+        }
+
+        button{
+            cursor: pointer;
         }
     }
 }
