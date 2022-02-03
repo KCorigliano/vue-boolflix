@@ -42,8 +42,8 @@ export default {
 
 <style lang="scss" scoped>
 .card-container{
-    width: calc((100% / 5) - 15px);
-    margin: 0 15px 15px 0;
+    min-width: 225px;
+    margin: 10px 15px 15px 0;
     cursor: pointer;
     height: 320px;
 
@@ -62,7 +62,7 @@ export default {
 
         img{
             width: 100%;
-            min-height: 320px;
+            height: 320px;
             object-fit: cover;
         }
     }
