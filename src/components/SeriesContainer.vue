@@ -5,8 +5,8 @@
             <div class="row">
                 <card-box 
                     v-for="film in seriesList"
-                    :title="film.title" 
-                    :originalTitle="film.original_title" 
+                    :title="film.name" 
+                    :originalTitle="film.original_name" 
                     :lang="film.original_language"
                     :vote="film.vote_average" 
                     :overview="film.overview"
@@ -22,8 +22,8 @@
         <div class="row">
             <card-box 
                 v-for="film in popularSeries"
-                :title="film.title" 
-                :originalTitle="film.original_title" 
+                :title="film.name" 
+                :originalTitle="film.original_name" 
                 :lang="film.original_language"
                 :vote="film.vote_average" 
                 :overview="film.overview"
@@ -36,8 +36,8 @@
         <div class="row">
             <card-box 
                 v-for="film in ratedSeries"
-                :title="film.title" 
-                :originalTitle="film.original_title" 
+                :title="film.name" 
+                :originalTitle="film.original_name" 
                 :lang="film.original_language"
                 :vote="film.vote_average" 
                 :overview="film.overview"

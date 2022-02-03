@@ -72,12 +72,10 @@ export default {
       // Film api
       axios.get('https://api.themoviedb.org/3/search/movie?query='+filmTitle+'&api_key=846025be620b599134a99b863faca32c').then((response) =>{
           this.searchedFilm = response.data.results;
-          console.log(this.searchedFilm)
       });
       // Serie TV api
       axios.get('https://api.themoviedb.org/3/search/tv?query='+filmTitle+'&api_key=846025be620b599134a99b863faca32c').then((response) =>{
           this.searchedSeries = response.data.results;
-          console.log(this.searchedSeries)
       })
       this.firstResearch=true;
     },
