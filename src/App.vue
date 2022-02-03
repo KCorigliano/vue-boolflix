@@ -1,11 +1,12 @@
 <template>
   <div id="app">
-    <header-box />
+    <header-box @searchFilm="searchButton"/>
     <main-container />
   </div>
 </template>
 
 <script>
+import axios from 'axios'
 import MainContainer from './components/MainContainer.vue'
 import HeaderBox from './components/HeaderBox.vue'
 
@@ -14,7 +15,20 @@ export default {
   components: {
     MainContainer,
     HeaderBox,
-  }
+  },
+  data() {
+    return {
+      searchedFilm: [],
+    }
+  },
+  methods: {
+    searchButton(){
+      axios.get('https://api.themoviedb.org/3/search/tv?query=tita&api_key=846025be620b599134a99b863faca32c').then((response) =>{
+          this.searchedFilm = response.data.results;
+          console.log(this.searchedFilm)
+      })
+    }
+  },
 }
 </script>
 

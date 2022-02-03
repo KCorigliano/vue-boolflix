@@ -3,14 +3,18 @@
         <h1>Boolflix</h1>
         <div>
             <input type="text" placeholder="Cerca un film">
-            <button>Search</button>
+            <button @click="searchFilm">Search</button>
         </div>
     </div>
 </template>
 
 <script>
 export default {
-    
+    methods: {
+        searchFilm(){
+            this.$emit('searchFilm');
+        }
+    },
 }
 </script>
 
