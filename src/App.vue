@@ -65,6 +65,22 @@ export default {
 #app{
   background-color: #141414;
   font-family: Arial, Helvetica, sans-serif;
+
+  /* width */
+    ::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        border-radius: 5px;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: grey;
+        border-radius: 10px;
+    }
 }
 
 </style>

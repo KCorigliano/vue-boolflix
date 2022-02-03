@@ -4,8 +4,8 @@
         <div class="row">
             <card-box 
                 v-for="film in filmList"
-                :title="film.name" 
-                :originalTitle="film.original_name" 
+                :title="film.title" 
+                :originalTitle="film.original_title" 
                 :lang="film.original_language"
                 :vote="film.vote_average" 
                 :overview="film.overview"
@@ -45,15 +45,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
-
 .container{
     min-height: calc(100vh - 50px);
     width: 100%;
     margin: 0 auto;
     padding: 15px 50px;
     color: white;
-    
 
     .row{
         display: flex;

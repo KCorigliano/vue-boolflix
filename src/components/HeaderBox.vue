@@ -21,6 +21,7 @@ export default {
     data() {
         return {
             filmTitle: '',
+            search: false,
         }
     },
     methods: {

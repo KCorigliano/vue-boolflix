@@ -5,10 +5,10 @@
             <img v-else :src="'https://image.tmdb.org/t/p/w500/'+background" alt="">
         </div>
         <div class="text" v-show="hover">
-            <p><span>Titolo:</span> {{title}}</p>
-            <p><span>Titolo originale:</span> {{originalTitle}}</p>
+            <p><span>Titolo: </span>{{title}}</p>
+            <p v-if="originalTitle != title"><span>Titolo originale: </span>{{originalTitle}}</p>
             <p><span>Lingua: </span><lang-flag :iso="lang" :squared="false"/></p>
-            <p><span>Voto:</span>{{newVote(vote)}}</p>
+            <p><span>Voto: </span><font-awesome-icon class="vote" icon="star" v-for="(num, i) in starVote" :key="i"/></p>
             <p v-if="!overview"><span>Overview:</span> Descrizione non disponibile</p>
             <p v-else><span>Overview:</span> {{overview}}</p>
         </div>
@@ -17,14 +17,21 @@
 
 <script>
 import LangFlag from 'vue-lang-code-flags';
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faStar } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
+library.add(faStar);
 
 export default {
     components:{
         LangFlag,
+        FontAwesomeIcon,
     },
     data() {
         return {
             hover: false,
+            starVote: [],
         }
     },
     props:{
@@ -34,10 +41,15 @@ export default {
         overview: String,
         background: String,
         lang: String,
+    },mounted() {
+        this.newVote(this.vote);
     },
     methods: {
         newVote(vote){
-            return Math.round((vote * 5 / 10))
+            const fiveVote = Math.round((vote * 5 / 10));
+            for (let i=0; i <= fiveVote; i++){
+                this.starVote.push(fiveVote);
+            }
         }
     },
     
@@ -45,22 +57,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-/* width */
-::-webkit-scrollbar {
-    width: 5px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-    border-radius: 10px;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-    background: grey;
-    border-radius: 10px;
-}
-
 .card-container{
     min-width: 225px;
     max-width: 225px;
@@ -103,7 +99,7 @@ export default {
                 font-weight: bold;
             }
 
-            .star{
+            .vote{
                 color: goldenrod;
             }
         }
