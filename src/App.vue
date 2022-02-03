@@ -22,8 +22,8 @@ export default {
     }
   },
   methods: {
-    searchButton(){
-      axios.get('https://api.themoviedb.org/3/search/tv?query=tita&api_key=846025be620b599134a99b863faca32c').then((response) =>{
+    searchButton(filmTitle){
+      axios.get('https://api.themoviedb.org/3/search/tv?query='+filmTitle+'&api_key=846025be620b599134a99b863faca32c').then((response) =>{
           this.searchedFilm = response.data.results;
           console.log(this.searchedFilm)
       })

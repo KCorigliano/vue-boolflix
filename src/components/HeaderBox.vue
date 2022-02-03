@@ -2,7 +2,7 @@
     <div class="header">
         <h1>Boolflix</h1>
         <div>
-            <input type="text" placeholder="Cerca un film">
+            <input type="text" v-model="filmTitle" placeholder="Cerca un film">
             <button @click="searchFilm">Search</button>
         </div>
     </div>
@@ -10,9 +10,14 @@
 
 <script>
 export default {
+    data() {
+        return {
+            filmTitle: '',
+        }
+    },
     methods: {
         searchFilm(){
-            this.$emit('searchFilm');
+            this.$emit('searchFilm', this.filmTitle);
         }
     },
 }
