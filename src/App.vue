@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <header-box @searchFilm="searchButton"/>
-    <main-container />
+    <main-container :filmList="searchedFilm" />
   </div>
 </template>
 
@@ -39,4 +39,7 @@ export default {
   box-sizing: border-box;
 }
 
+#app{
+  background-color: grey;
+}
 </style>
