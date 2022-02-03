@@ -1,10 +1,10 @@
 <template>
-    <div class="card-container">
-        <div class="background">
+    <div class="card-container" @mouseover="hover=true" @mouseleave="hover=false">
+        <div class="background" v-show="!hover">
             <p v-if="!background">Nessuna immagine</p>
             <img v-else :src="'https://image.tmdb.org/t/p/w500/'+background" alt="">
         </div>
-        <div class="text">
+        <div class="text" v-show="hover">
             <p><span>Titolo:</span> {{title}}</p>
             <p><span>Titolo originale:</span> {{originalTitle}}</p>
             <p><span>Lingua:</span> {{lang}}</p>
@@ -40,19 +40,14 @@ export default {
     width: calc((100% / 5) - 15px);
     margin: 0 15px 15px 0;
     cursor: pointer;
-    position: relative;
+    height: 320px;
 
     .background{
-        position: absolute;
         min-height: 320px;
         z-index: 1000;
         text-align: center;
         line-height: 320px;
-
-        &:hover{
-            display: none;
-        }
-
+        
         p{
             background-color: black;
             color: white;
@@ -65,11 +60,6 @@ export default {
             width: 100%;
             min-height: 320px;
             object-fit: cover;
-            display: block;
-
-            &:hover{
-                display: none;
-            }
         }
     }
 
