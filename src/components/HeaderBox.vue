@@ -2,12 +2,9 @@
     <div class="header">
         <div>
             <h1>Boolflix</h1>
-            <p>Home</p>
-            <p>Serie TV</p>
-            <p>Film</p>
-            <p>Originali</p>
-            <p>Aggiunti di recente</p>
-            <p>La mia lista</p>
+            <p @click="homeClick">Home</p>
+            <p @click="serieClick">Serie TV</p>
+            <p @click="filmClick">Film</p>
         </div>
         <div>
             <input type="text" v-model="filmTitle" placeholder="Cerca un film" @keyup.enter="searchFilm">
@@ -22,11 +19,23 @@ export default {
         return {
             filmTitle: '',
             search: false,
+            homeBool: true,
+            serieBool: false,
+            filmBool: false,
         }
     },
     methods: {
         searchFilm(){
             this.$emit('searchFilm', this.filmTitle);
+        },
+        homeClick(){
+            this.$emit('homeClick', this.homeBool, this.serieBool, this.filmBool)
+        },
+        serieClick(){
+            this.$emit('serieClick', this.homeBool, this.serieBool, this.filmBool)
+        },
+        filmClick(){
+            this.$emit('filmClick', this.homeBool, this.serieBool, this.filmBool)
         }
     },
 }

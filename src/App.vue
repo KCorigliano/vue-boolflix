@@ -1,7 +1,25 @@
 <template>
   <div id="app">
-    <header-box @searchFilm="searchButton"/>
-    <main-container :filmList="searchedFilm" :seriesList="searchedSeries"/>
+    <header-box 
+      @searchFilm="searchButton"
+      @homeClick="homeClick"
+      @serieClick="serieClick"
+      @filmClick="filmClick"
+    />
+    <main-container 
+      :filmList="searchedFilm" 
+      :popularFilm="popularFilm"
+      :recommendedFilm="recommendedFilm"
+      :oncomingFilm="oncomingFilm"
+      :seriesList="searchedSeries" 
+      :popularSeries="popularSeries" 
+      :recommendedSeries="recommendedSeries" 
+      :ratedSeries="ratedSeries" 
+      :firstResearch="firstResearch"
+      :homeBool="homeBool"
+      :serieBool="serieBool"
+      :filmBool="filmBool"
+    />
   </div>
 </template>
 
@@ -19,16 +37,34 @@ export default {
   data() {
     return {
       searchedFilm: [],
+      popularFilm: [],
+      oncomingFilm: [],
       searchedSeries: [],
+      popularSeries: [],
+      ratedSeries: [],
+      firstResearch: false,
+      homeBool:true,
+      serieBool:false,
+      filmBool:false,
     }
   },
   mounted(){
-    axios.get('https://api.themoviedb.org/3/search/movie?query='+this.randomLetter()+'&api_key=846025be620b599134a99b863faca32c').then((response) =>{
-      this.searchedFilm = response.data.results;
+    // Popular film
+    axios.get('https://api.themoviedb.org/3/movie/popular?api_key=846025be620b599134a99b863faca32c&language=en-US&page=1').then((response) =>{
+      this.popularFilm = response.data.results;
     });
-    axios.get('https://api.themoviedb.org/3/search/tv?query='+this.randomLetter()+'&api_key=846025be620b599134a99b863faca32c').then((response) =>{
-      this.searchedSeries = response.data.results;
-    })
+    // Oncoming film
+    axios.get('https://api.themoviedb.org/3/movie/upcoming?api_key=846025be620b599134a99b863faca32c&language=en-US&page=1').then((response) =>{
+      this.oncomingFilm = response.data.results;
+    });
+    // Popular serie
+    axios.get('https://api.themoviedb.org/3/tv/popular?api_key=846025be620b599134a99b863faca32c&language=en-US&page=1').then((response) =>{
+      this.popularSeries = response.data.results;
+    });
+    // Most rated serie
+    axios.get('https://api.themoviedb.org/3/tv/top_rated?api_key=846025be620b599134a99b863faca32c&language=en-US&page=1').then((response) =>{
+      this.ratedSeries = response.data.results;
+    });
   },
   methods: {
     // Api for the search button
@@ -36,20 +72,29 @@ export default {
       // Film api
       axios.get('https://api.themoviedb.org/3/search/movie?query='+filmTitle+'&api_key=846025be620b599134a99b863faca32c').then((response) =>{
           this.searchedFilm = response.data.results;
+          console.log(this.searchedFilm)
       });
       // Serie TV api
       axios.get('https://api.themoviedb.org/3/search/tv?query='+filmTitle+'&api_key=846025be620b599134a99b863faca32c').then((response) =>{
           this.searchedSeries = response.data.results;
+          console.log(this.searchedSeries)
       })
+      this.firstResearch=true;
     },
-    randomLetter(){
-      const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-      let result = '';
-      const charactersLength = characters.length;
-      for ( let i = 0; i <= 1; i++ ) {
-        result = characters.charAt(Math.floor(Math.random() * charactersLength));
-      }
-      return result;
+    homeClick(){
+      this.homeBool=true;
+      this.serieBool=false;
+      this.filmBool=false;
+    },
+    serieClick(){
+      this.homeBool=false;
+      this.serieBool=true;
+      this.filmBool=false;
+    },
+    filmClick(){
+      this.homeBool=false;
+      this.serieBool=false;
+      this.filmBool=true;
     }
   },
 }

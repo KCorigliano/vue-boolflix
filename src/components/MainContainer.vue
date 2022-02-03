@@ -1,45 +1,45 @@
 <template>
     <div class="container">
-        <h1>Film:</h1>
-        <div class="row">
-            <card-box 
-                v-for="film in filmList"
-                :title="film.title" 
-                :originalTitle="film.original_title" 
-                :lang="film.original_language"
-                :vote="film.vote_average" 
-                :overview="film.overview"
-                :background="film.poster_path" 
-                :key="film.id"
-            />
-        </div>
+        <film-container 
+            :filmList="filmList" 
+            :popularFilm="popularFilm"
+            :recommendedFilm="recommendedFilm"
+            :oncomingFilm="oncomingFilm"
+            :firstResearch="firstResearch"
+            v-if="homeBool || filmBool"
+        />
 
-        <h1>Serie TV:</h1>
-        <div class="row">
-            <card-box 
-                v-for="serie in seriesList"
-                :title="serie.name" 
-                :originalTitle="serie.original_name" 
-                :lang="serie.original_language"
-                :vote="serie.vote_average" 
-                :overview="serie.overview"
-                :background="serie.poster_path" 
-                :key="serie.id"
-            />
-        </div>
+        <series-container 
+            :seriesList="seriesList" 
+            :popularSeries="popularSeries" 
+            :recommendedSeries="recommendedSeries" 
+            :ratedSeries="ratedSeries"
+            :firstResearch="firstResearch"
+            v-if="homeBool || serieBool"
+        />
     </div>
 </template>
 
 <script>
-import CardBox from './CardBox.vue'
+import FilmContainer from './FilmContainer.vue'
+import SeriesContainer from './SeriesContainer.vue'
 
 export default {
     components:{
-        CardBox,
+        FilmContainer,
+        SeriesContainer
     },
     props:{
         filmList: Array,
+        popularFilm: Array,
+        oncomingFilm: Array,
+        popularSeries: Array,
+        ratedSeries: Array,
         seriesList: Array,
+        firstResearch: Boolean,
+        homeBool: Boolean,
+        serieBool: Boolean,
+        filmBool: Boolean,
     }
 }
 </script>
