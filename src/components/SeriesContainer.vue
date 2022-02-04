@@ -15,8 +15,6 @@
                 />
             </div>
         </div>
-   
- 
 
         <h1>Serie più popolari:</h1>
         <div class="row">
@@ -51,6 +49,7 @@
 
 <script>
 import CardBox from './CardBox.vue'
+
 export default {
     components:{
         CardBox,

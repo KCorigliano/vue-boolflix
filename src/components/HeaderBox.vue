@@ -1,10 +1,10 @@
 <template>
     <div class="header">
         <div>
-            <h1>Boolflix</h1>
-            <p @click="homeClick">Home</p>
-            <p @click="serieClick">Serie TV</p>
-            <p @click="filmClick">Film</p>
+            <h1 @click="homeClick">Boolflix</h1>
+            <p :class="homeBool ? 'active':''" @click="homeClick">Home</p>
+            <p :class="serieBool ? 'active':''" @click="serieClick">Serie TV</p>
+            <p :class="filmBool ? 'active':''" @click="filmClick">Film</p>
         </div>
         <div>
             <input type="text" v-model="filmTitle" placeholder="Cerca un film" @keyup.enter="searchFilm">
@@ -58,6 +58,7 @@ export default {
             color: red;
             text-transform: uppercase;
             margin-right: 50px;
+            cursor: pointer;
         }
     
         p{
@@ -67,6 +68,11 @@ export default {
             &:hover{
                 cursor: pointer;
                 color: red;
+            }
+
+            .active{
+                color: red;
+                border-bottom: 2px solid red;
             }
         }
     }

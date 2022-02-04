@@ -46,6 +46,8 @@ export default {
       homeBool:true,
       serieBool:false,
       filmBool:false,
+      api_key:'846025be620b599134a99b863faca32c&language=en-US&page=1',
+      videoSpiderman: [],
     }
   },
   mounted(){
@@ -70,11 +72,17 @@ export default {
     // Api for the search button
     searchButton(filmTitle){
       // Film api
-      axios.get('https://api.themoviedb.org/3/search/movie?query='+filmTitle+'&api_key=846025be620b599134a99b863faca32c').then((response) =>{
+
+      const params = {
+        query: filmTitle,
+        api_key:this.api_key
+      }
+
+      axios.get('https://api.themoviedb.org/3/search/movie?query=',{params}).then((response) =>{
           this.searchedFilm = response.data.results;
       });
       // Serie TV api
-      axios.get('https://api.themoviedb.org/3/search/tv?query='+filmTitle+'&api_key=846025be620b599134a99b863faca32c').then((response) =>{
+      axios.get('https://api.themoviedb.org/3/search/tv?query=',{params}).then((response) =>{
           this.searchedSeries = response.data.results;
       })
       this.firstResearch=true;
@@ -110,20 +118,20 @@ export default {
   font-family: Arial, Helvetica, sans-serif;
 
   /* width */
-    ::-webkit-scrollbar {
-        width: 5px;
-    }
+  ::-webkit-scrollbar {
+      width: 5px;
+  }
 
-    /* Track */
-    ::-webkit-scrollbar-track {
-        border-radius: 5px;
-    }
+  /* Track */
+  ::-webkit-scrollbar-track {
+      border-radius: 5px;
+  }
 
-    /* Handle */
-    ::-webkit-scrollbar-thumb {
-        background: grey;
-        border-radius: 10px;
-    }
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+      background: grey;
+      border-radius: 10px;
+  }
 }
 
 </style>

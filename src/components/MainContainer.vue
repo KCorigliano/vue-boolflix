@@ -1,12 +1,17 @@
 <template>
     <div class="container">
+        <home-container 
+            :popularFilm="popularFilm"
+            v-if="homeBool"
+        />
+
         <film-container 
             :filmList="filmList" 
             :popularFilm="popularFilm"
             :recommendedFilm="recommendedFilm"
             :oncomingFilm="oncomingFilm"
             :firstResearch="firstResearch"
-            v-if="homeBool || filmBool"
+            v-if="filmBool"
         />
 
         <series-container 
@@ -15,7 +20,7 @@
             :recommendedSeries="recommendedSeries" 
             :ratedSeries="ratedSeries"
             :firstResearch="firstResearch"
-            v-if="homeBool || serieBool"
+            v-if="serieBool"
         />
     </div>
 </template>
@@ -23,11 +28,13 @@
 <script>
 import FilmContainer from './FilmContainer.vue'
 import SeriesContainer from './SeriesContainer.vue'
+import HomeContainer from './HomeContainer.vue'
 
 export default {
     components:{
         FilmContainer,
-        SeriesContainer
+        SeriesContainer,
+        HomeContainer
     },
     props:{
         filmList: Array,
@@ -49,7 +56,7 @@ export default {
     min-height: calc(100vh - 50px);
     width: 100%;
     margin: 0 auto;
-    padding: 15px 50px;
+    padding: 0 50px;
     color: white;
 
     .row{
