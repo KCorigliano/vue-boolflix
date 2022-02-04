@@ -2,9 +2,9 @@
     <div class="header">
         <div>
             <h1 @click="homeClick">Boolflix</h1>
-            <p :class="homeBool ? 'active':''" @click="homeClick">Home</p>
-            <p :class="serieBool ? 'active':''" @click="serieClick">Serie TV</p>
-            <p :class="filmBool ? 'active':''" @click="filmClick">Film</p>
+            <p :class="newHomeBool ? 'clicked':''" @click="homeClick">Home</p>
+            <p :class="newSerieBool ? 'clicked':''" @click="serieClick">Serie TV</p>
+            <p :class="newFilmBool ? 'clicked':''" @click="filmClick">Film</p>
         </div>
         <div>
             <input type="text" v-model="filmTitle" placeholder="Cerca un film" @keyup.enter="searchFilm">
@@ -23,6 +23,11 @@ export default {
             serieBool: false,
             filmBool: false,
         }
+    },
+    props:{
+        newHomeBool: Boolean,
+        newSerieBool: Boolean,
+        newFilmBool: Boolean,
     },
     methods: {
         searchFilm(){
@@ -63,17 +68,25 @@ export default {
     
         p{
             color: white;
-            margin-right: 30px;
+            margin-right: 0;
+            padding: 0 10px;
+            transition: all 0.5s;
 
             &:hover{
                 cursor: pointer;
-                color: red;
-            }
-
-            .active{
-                color: red;
                 border-bottom: 2px solid red;
+                padding-bottom: 4px;
+                font-weight: bold;
+                font-size: 18px;
+                transition: all 0.5s;
             }
+        }
+
+        .clicked{
+            border-bottom: 2px solid red;
+            padding-bottom: 4px;
+            font-weight: bold;
+            font-size: 18px;
         }
     }
 

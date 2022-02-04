@@ -8,7 +8,6 @@
         <film-container 
             :filmList="filmList" 
             :popularFilm="popularFilm"
-            :recommendedFilm="recommendedFilm"
             :oncomingFilm="oncomingFilm"
             :firstResearch="firstResearch"
             v-if="filmBool"
@@ -17,7 +16,6 @@
         <series-container 
             :seriesList="seriesList" 
             :popularSeries="popularSeries" 
-            :recommendedSeries="recommendedSeries" 
             :ratedSeries="ratedSeries"
             :firstResearch="firstResearch"
             v-if="serieBool"

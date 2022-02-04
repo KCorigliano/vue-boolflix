@@ -5,15 +5,16 @@
       @homeClick="homeClick"
       @serieClick="serieClick"
       @filmClick="filmClick"
+      :newHomeBool="homeBool"
+      :newSerieBool="serieBool"
+      :newFilmBool="filmBool"
     />
     <main-container 
       :filmList="searchedFilm" 
       :popularFilm="popularFilm"
-      :recommendedFilm="recommendedFilm"
       :oncomingFilm="oncomingFilm"
       :seriesList="searchedSeries" 
       :popularSeries="popularSeries" 
-      :recommendedSeries="recommendedSeries" 
       :ratedSeries="ratedSeries" 
       :firstResearch="firstResearch"
       :homeBool="homeBool"
@@ -47,7 +48,6 @@ export default {
       serieBool:false,
       filmBool:false,
       api_key:'846025be620b599134a99b863faca32c&language=en-US&page=1',
-      videoSpiderman: [],
     }
   },
   mounted(){
