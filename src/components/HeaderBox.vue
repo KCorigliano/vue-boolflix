@@ -7,21 +7,37 @@
             <p :class="newFilmBool ? 'clicked':''" @click="filmClick">Film</p>
         </div>
         <div>
-            <input type="text" v-model="filmTitle" placeholder="Cerca un film" @keyup.enter="searchFilm">
-            <button @click="searchFilm">Search</button>
+            <div v-if="searchInput">
+                <input type="text" v-model="filmTitle" placeholder="Cerca un film" @keyup.enter="searchFilm">
+                <button @click="searchFilm">Search</button>
+            </div>
+            <font-awesome-icon class="search-icon" icon="search" @click="searchInputShow" />
+            <div class="user"></div>
+            <font-awesome-icon icon="chevron-down" />
         </div>
     </div>
 </template>
 
 <script>
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
+library.add(faSearch);
+library.add(faChevronDown);
+
 export default {
+    components:{
+        FontAwesomeIcon,
+    },
     data() {
         return {
             filmTitle: '',
-            search: false,
             homeBool: true,
             serieBool: false,
             filmBool: false,
+            searchInput: false
         }
     },
     props:{
@@ -41,6 +57,9 @@ export default {
         },
         filmClick(){
             this.$emit('filmClick', this.homeBool, this.serieBool, this.filmBool)
+        },
+        searchInputShow(){
+            this.searchInput = !this.searchInput
         }
     },
 }
@@ -48,6 +67,11 @@ export default {
 
 <style lang="scss" scoped>
 .header{
+
+    ::placeholder{
+        color: white;
+    }
+
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -99,5 +123,38 @@ export default {
             cursor: pointer;
         }
     }
+
+    div{
+        display: flex;
+        align-items: center;
+        color: white;
+
+        
+
+        div{
+            margin-right: 15px;
+
+            input,
+            button{
+                background-color: rgb(80, 80, 80);
+                color: white;
+                border: none;
+                border-radius: 15px;
+                padding: 5px 10px;
+            }
+        }
+
+        .search-icon{
+            cursor: pointer;
+        }
+
+        .user{
+            width: 40px;
+            height: 40px;
+            background-color: greenyellow;
+            margin: 15px;
+        }
+    }
+  
 }
 </style>

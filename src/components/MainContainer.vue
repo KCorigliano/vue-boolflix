@@ -54,7 +54,7 @@ export default {
     min-height: calc(100vh - 50px);
     width: 100%;
     margin: 0 auto;
-    padding: 0 50px;
+    padding: 15px 50px;
     color: white;
 
     .row{

@@ -1,0 +1,65 @@
+.container{
+    max-height: calc(100vh - 50px);
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 50px;
+    color: white;
+    text-align: center;
+
+    h1{
+        margin-bottom: 15px;
+        margin-top: 0;
+    }
+
+    .row{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        overflow: hidden;
+        height: 610px;
+        margin-bottom: 5px;
+
+        .jumbo-img{
+            transition: all 0.5s;
+        }
+
+        .arrow{
+            color: white;
+            font-size: 32px;
+            cursor: pointer;
+            transition: all 0.2s;
+
+            &:hover{
+                color: red;
+                transition: all 0.2s;
+            }
+        }
+    }
+    
+    .radio-row{
+        display: flex;
+        justify-content: center;
+        align-items: baseline;
+        overflow-x: visible;
+
+        .clickable{
+            cursor: pointer;
+        }
+
+        .active{
+            border: 2px solid white;
+            height: 150px;
+            width: 175px;
+            filter: brightness(175%);
+            transition: all 1s;
+        }
+
+        .not-active{
+            height: 150px;
+            width: 150px;
+            filter: brightness(50%);
+            transition: all 1s;
+        }
+    }
+
+}

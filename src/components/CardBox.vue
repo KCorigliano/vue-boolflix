@@ -16,17 +16,17 @@
 </template>
 
 <script>
-import LangFlag from 'vue-lang-code-flags';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faStar } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import LangFlag from 'vue-lang-code-flags';
 
 library.add(faStar);
 
 export default {
     components:{
-        LangFlag,
         FontAwesomeIcon,
+        LangFlag
     },
     data() {
         return {
@@ -68,6 +68,7 @@ export default {
         min-height: 320px;
         text-align: center;
         line-height: 320px;
+        border-radius: 5px;
         
         p{
             background-color: black;
@@ -81,6 +82,7 @@ export default {
             width: 100%;
             height: 320px;
             object-fit: cover;
+            border-radius: 5px;
         }
     }
 
@@ -91,6 +93,7 @@ export default {
         border: 2px solid white;
         height: 320px;
         overflow-y: auto;
+        border-radius: 5px;
 
         p{
             margin-bottom: 15px;

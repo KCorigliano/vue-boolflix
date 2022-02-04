@@ -4,6 +4,7 @@
         <div class="row">
             <div @click="prevImage()"><font-awesome-icon class="arrow" icon="chevron-left" /></div>
             <slider 
+                class="jumbo-img"
                 :background="popularFilm[counterClick].poster_path" 
                 @startAutoplay="startAutoplay"
                 @stopAutoplay="stopAutoplay"
@@ -84,61 +85,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.container{
-    min-height: calc(100vh - 50px);
-    width: 100%;
-    margin: 0 auto;
-    padding: 0 50px;
-    color: white;
-    text-align: center;
-
-    h1{
-        margin-bottom: 15px;
-        margin-top: 0;
-    }
-
-    .row{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        overflow: hidden;
-        height: 650px;
-        margin-bottom: 25px;
-
-        .arrow{
-            color: white;
-            font-size: 32px;
-            cursor: pointer;
-
-            &:hover{
-                color: red;
-            }
-        }
-    }
-    
-    .radio-row{
-        display: flex;
-        justify-content: center;
-        align-items: baseline;
-        overflow-x: visible;
-
-        .clickable{
-            cursor: pointer;
-        }
-
-        .active{
-            border: 2px solid white;
-            height: 150px;
-            width: 175px;
-            filter: brightness(175%);
-        }
-
-        .not-active{
-            height: 150px;
-            width: 150px;
-            filter: brightness(50%);
-        }
-    }
-
-}
+@import '@/style/homeContainer.scss'
 </style>
