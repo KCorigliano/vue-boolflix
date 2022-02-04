@@ -1,27 +1,34 @@
 <template>
     <div class="container">
-        <h1>Film popolari al momento</h1>
+        <h1>Film consigliati</h1>
         <div class="row">
-            <div @click="nextImage()"><font-awesome-icon class="arrow" icon="chevron-left" /></div>
+            <div @click="prevImage()"><font-awesome-icon class="arrow" icon="chevron-left" /></div>
             <slider 
-                :title="popularFilm[counterClick].title" 
-                :originalTitle="popularFilm[counterClick].original_title" 
-                :lang="popularFilm[counterClick].original_language"
-                :vote="popularFilm[counterClick].vote_average" 
-                :overview="popularFilm[counterClick].overview"
                 :background="popularFilm[counterClick].poster_path" 
-                :key="popularFilm[counterClick].id"
+                @startAutoplay="startAutoplay"
+                @stopAutoplay="stopAutoplay"
             />
             <div @click="nextImage()"><font-awesome-icon class="arrow" icon="chevron-right" /></div>
         </div>
-        <div class="radio-row">
+        <!-- <div class="radio-row">
             <div class="radio" :class="i === counterClick ? 'active':''" v-for="(film,i) in popularFilm" :key="film.id"></div>
+        </div> -->
+        <div class="radio-row">
+            <slider-background 
+                @currentImage="currentImage(i)"
+                class="clickable"
+                v-for="(film, i) in popularFilm"
+                :background="film.poster_path"
+                :key="i"
+                :class="i === counterClick ? 'active':'not-active'"
+            />
         </div>
     </div>
 </template>
 
 <script>
 import Slider from './Slider.vue'
+import SliderBackground from './SliderBackgound.vue'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
@@ -33,6 +40,7 @@ library.add(faChevronLeft);
 export default {
     components:{
         Slider,
+        SliderBackground,
         FontAwesomeIcon,
     },
     props:{
@@ -41,6 +49,8 @@ export default {
     data() {
         return {
             counterClick: 0,
+            stopplay: this.interval,
+            statusAutoPlay: true,
         }
     },
     methods: {
@@ -55,8 +65,21 @@ export default {
             if(this.counterClick <0){
                 this.counterClick=20;
             }
-        }
+        },
+        currentImage(i){
+            this.counterClick = i;
+        },
+        startAutoplay: function(){
+            this.interval = setInterval(() => this.nextImage(), 5000);
+        },
+        stopAutoplay: function(){
+            clearInterval(this.interval);
+            this.statusAutoPlay = false;
+        },
     },
+    mounted: function(){
+        this.startAutoplay();
+    }
 }
 </script>
 
@@ -79,7 +102,7 @@ export default {
         justify-content: space-between;
         align-items: center;
         overflow: hidden;
-        height: 750px;
+        height: 650px;
         margin-bottom: 25px;
 
         .arrow{
@@ -96,19 +119,24 @@ export default {
     .radio-row{
         display: flex;
         justify-content: center;
+        align-items: baseline;
+        overflow-x: visible;
 
-        .radio{
-            background-color: white;
-            width: 15px;
-            height: 15px;
-            border-radius: 50%;
-            margin: 0 10px;
+        .clickable{
+            cursor: pointer;
         }
 
         .active{
-            background-color: red;
             border: 2px solid white;
-            box-shadow: 0 0 5px red;
+            height: 150px;
+            width: 175px;
+            filter: brightness(175%);
+        }
+
+        .not-active{
+            height: 150px;
+            width: 150px;
+            filter: brightness(50%);
         }
     }
 

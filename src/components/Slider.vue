@@ -1,51 +1,31 @@
 <template>
-    <div class="card-container">
+    <div class="card-container" 
+        @mouseover="stopAutoplay()"
+        @mouseleave="startAutoplay()">
         <img :src="'https://image.tmdb.org/t/p/w500/'+background" alt="">
     </div>
 </template>
 
 <script>
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faStar } from '@fortawesome/free-solid-svg-icons'
-// import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-
-library.add(faStar);
-
 export default {
-    components:{
-        // FontAwesomeIcon,
-    },
-    data() {
-        return {
-            starVote: [],
-        }
-    },
     props:{
-        title: String,
-        originalTitle: String,
-        vote: Number,
-        overview: String,
         background: String,
-        lang: String,
-    },mounted() {
-        this.newVote(this.vote);
     },
     methods: {
-        newVote(vote){
-            const fiveVote = Math.round((vote * 5 / 10));
-            for (let i=0; i <= fiveVote; i++){
-                this.starVote.push(fiveVote);
-            }
+        stopAutoplay(){
+            this.$emit('stopAutoplay')
+        },
+        startAutoplay(){
+            this.$emit('startAutoplay')
         }
     },
-    
 }
 </script>
 
 <style lang="scss" scoped>
 .card-container{
-    width: 500px;
-    height: 750px;
+    width: 450px;
+    height: 650px;
 
     img{
         width: 100%;
