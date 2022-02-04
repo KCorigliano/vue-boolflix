@@ -5,9 +5,10 @@
       @homeClick="homeClick"
       @serieClick="serieClick"
       @filmClick="filmClick"
-      :newHomeBool="homeBool"
-      :newSerieBool="serieBool"
-      :newFilmBool="filmBool"
+      :homeBool="homeBool"
+      :serieBool="serieBool"
+      :filmBool="filmBool"
+      :searchInput="searchInput"
     />
     <main-container 
       :filmList="searchedFilm" 
@@ -47,6 +48,7 @@ export default {
       homeBool:true,
       serieBool:false,
       filmBool:false,
+      searchInput: false,
       api_key:'846025be620b599134a99b863faca32c&language=en-US&page=1',
     }
   },
@@ -80,6 +82,7 @@ export default {
         this.searchedSeries = response.data.results;
       })
       this.firstResearch=true;
+      this.searchInput=!this.searchInput;
     },
     homeClick(){
       this.homeBool=true;
@@ -95,7 +98,7 @@ export default {
       this.homeBool=false;
       this.serieBool=false;
       this.filmBool=true;
-    }
+    },
   },
 }
 </script>
