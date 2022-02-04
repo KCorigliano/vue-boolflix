@@ -72,18 +72,12 @@ export default {
     // Api for the search button
     searchButton(filmTitle){
       // Film api
-
-      const params = {
-        query: filmTitle,
-        api_key:this.api_key
-      }
-
-      axios.get('https://api.themoviedb.org/3/search/movie?query=',{params}).then((response) =>{
-          this.searchedFilm = response.data.results;
+      axios.get('https://api.themoviedb.org/3/search/movie?query='+filmTitle+'&api_key=846025be620b599134a99b863faca32c').then((response) =>{
+        this.searchedFilm = response.data.results;
       });
       // Serie TV api
-      axios.get('https://api.themoviedb.org/3/search/tv?query=',{params}).then((response) =>{
-          this.searchedSeries = response.data.results;
+      axios.get('https://api.themoviedb.org/3/search/tv?query='+filmTitle+'&api_key=846025be620b599134a99b863faca32c').then((response) =>{
+        this.searchedSeries = response.data.results;
       })
       this.firstResearch=true;
     },
