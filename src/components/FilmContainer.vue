@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div v-if="firstResearch">
-            <h1>Film cercati:</h1>
+            <h1>Searched films:</h1>
             <div class="row">
                 <card-box 
                     v-for="film in filmList"
@@ -11,6 +11,8 @@
                     :vote="film.vote_average" 
                     :overview="film.overview"
                     :background="film.poster_path" 
+                    :filmID="film.id"
+                    :type="'movie'"
                     :key="film.id"
                 />
             </div>
@@ -18,7 +20,7 @@
 
 
 
-        <h1>Film più popolari:</h1>
+        <h1>Most popular films:</h1>
         <div class="row">
             <card-box 
                 v-for="film in popularFilm"
@@ -28,11 +30,13 @@
                 :vote="film.vote_average" 
                 :overview="film.overview"
                 :background="film.poster_path" 
+                :filmID="film.id"
+                :type="'movie'"
                 :key="film.id"
             />
         </div>
 
-        <h1>Film in arrivo:</h1>
+        <h1>Oncoming films:</h1>
         <div class="row">
             <card-box 
                 v-for="film in oncomingFilm"
@@ -42,6 +46,8 @@
                 :vote="film.vote_average" 
                 :overview="film.overview"
                 :background="film.poster_path" 
+                :filmID="film.id"
+                :type="'movie'"
                 :key="film.id"
             />
         </div>
@@ -59,6 +65,7 @@ export default {
         filmList: Array,
         popularFilm: Array,
         oncomingFilm: Array,
+        genres: Array,
         firstResearch: Boolean,
     }
 }

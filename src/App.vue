@@ -9,6 +9,8 @@
       :serieBool="serieBool"
       :filmBool="filmBool"
       :searchInput="searchInput"
+      :filmList="searchedFilm" 
+      :seriesList="searchedSeries"
     />
     <main-container 
       :filmList="searchedFilm" 
@@ -49,7 +51,7 @@ export default {
       serieBool:false,
       filmBool:false,
       searchInput: false,
-      api_key:'846025be620b599134a99b863faca32c&language=en-US&page=1',
+      api_key:'846025be620b599134a99b863faca32c',
     }
   },
   mounted(){
@@ -72,17 +74,27 @@ export default {
   },
   methods: {
     // Api for the search button
-    searchButton(filmTitle){
-      // Film api
-      axios.get('https://api.themoviedb.org/3/search/movie?query='+filmTitle+'&api_key=846025be620b599134a99b863faca32c').then((response) =>{
-        this.searchedFilm = response.data.results;
-      });
-      // Serie TV api
-      axios.get('https://api.themoviedb.org/3/search/tv?query='+filmTitle+'&api_key=846025be620b599134a99b863faca32c').then((response) =>{
-        this.searchedSeries = response.data.results;
+    searchButton(query) {
+      this.searchMovies(query)
+      this.searchTv(query)
+    },
+    async searchMovies(query) {
+      this.searchedFilm = await this.callApi('movie', query)
+    },
+    async searchTv(query) {
+      this.searchedSeries = await this.callApi('tv', query);
+    },
+  
+    async callApi(type, query) {
+      const params = {
+        query: query,
+        api_key: this.api_key
+      }
+      const results = await axios.get(`https://api.themoviedb.org/3/search/${type}`, { params }).then((response) => {
+          this.firstResearch=true;
+          return response.data.results;
       })
-      this.firstResearch=true;
-      this.searchInput=!this.searchInput;
+      return results;
     },
     homeClick(){
       this.homeBool=true;

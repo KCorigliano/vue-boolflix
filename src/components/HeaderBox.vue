@@ -7,7 +7,7 @@
             <p :class="filmBool ? 'clicked':''" @click="filmClick">Film</p>
         </div>
         <div>
-            <div v-if="searchInput">
+            <div v-if="searchInputBool">
                 <input type="text" v-model="filmTitle" placeholder="Cerca un film" @keyup.enter="searchFilm">
                 <button @click="searchFilm">Search</button>
             </div>
@@ -34,6 +34,7 @@ export default {
     data() {
         return {
             filmTitle: '',
+            searchInputBool: this.searchInput,
         }
     },
     props:{
@@ -41,6 +42,8 @@ export default {
         serieBool: Boolean,
         filmBool: Boolean,
         searchInput: Boolean,
+        filmList: Array,
+        seriesList: Array,
     },
     methods: {
         searchFilm(){
@@ -56,8 +59,8 @@ export default {
             this.$emit('filmClick', this.homeBool, this.serieBool, this.filmBool)
         },
         searchInputShow(){
-            this.searchInput = !this.searchInput
-        }
+            this.searchInputBool = !this.searchInputBool
+        },
     },
 }
 </script>

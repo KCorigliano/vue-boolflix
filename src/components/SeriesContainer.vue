@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div v-if="firstResearch">
-            <h1>Serie cercate:</h1>
+            <h1>Searched series:</h1>
             <div class="row">
                 <card-box 
                     v-for="film in seriesList"
@@ -11,12 +11,14 @@
                     :vote="film.vote_average" 
                     :overview="film.overview"
                     :background="film.poster_path" 
+                    :filmID="film.id"
+                    :type="'tv'"
                     :key="film.id"
                 />
             </div>
         </div>
 
-        <h1>Serie più popolari:</h1>
+        <h1>Popular series:</h1>
         <div class="row">
             <card-box 
                 v-for="film in popularSeries"
@@ -26,11 +28,13 @@
                 :vote="film.vote_average" 
                 :overview="film.overview"
                 :background="film.poster_path" 
+                :filmID="film.id"
+                :type="'tv'"
                 :key="film.id"
             />
         </div>
 
-        <h1>Serie più votate:</h1>
+        <h1>Most rated series:</h1>
         <div class="row">
             <card-box 
                 v-for="film in ratedSeries"
@@ -40,6 +44,8 @@
                 :vote="film.vote_average" 
                 :overview="film.overview"
                 :background="film.poster_path" 
+                :filmID="film.id"
+                :type="'tv'"
                 :key="film.id"
             />
         </div>

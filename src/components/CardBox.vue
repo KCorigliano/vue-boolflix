@@ -5,11 +5,14 @@
             <img v-else :src="'https://image.tmdb.org/t/p/w500/'+background" alt="">
         </div>
         <div class="text" v-show="hover">
-            <p><span>Titolo: </span>{{title}}</p>
-            <p v-if="originalTitle != title"><span>Titolo originale: </span>{{originalTitle}}</p>
-            <p><span>Lingua: </span><lang-flag :iso="lang" :squared="false"/></p>
-            <p><span>Voto: </span><star-vote :vote="vote"/></p>
-            <p v-if="!overview"><span>Overview:</span> Descrizione non disponibile</p>
+            <p><span>Title: </span>{{title}}</p>
+            <p v-if="originalTitle != title"><span>Original title: </span>{{originalTitle}}</p>
+            <div class="genre">Genres: 
+                <p v-for="(generi, i) in genre" :key="i">- {{genre[i].name}}</p>
+            </div>
+            <p><span>Leanguage: </span><lang-flag :iso="lang" :squared="false"/></p>
+            <p><span>Votes: </span><star-vote :vote="vote"/></p>
+            <p v-if="!overview"><span>Overview:</span> Description not avaible</p>
             <p v-else><span>Overview:</span> {{overview}}</p>
         </div>
     </div>
@@ -17,7 +20,7 @@
 
 <script>
 import StarVote from './StarVote.vue'
-
+import axios from 'axios'
 import LangFlag from 'vue-lang-code-flags';
 
 
@@ -30,6 +33,8 @@ export default {
         return {
             hover: false,
             starVote: [],
+            filmDetail: [],
+            genre: [],
         }
     },
     props:{
@@ -39,7 +44,22 @@ export default {
         overview: String,
         background: String,
         lang: String,
-        genre: String,
+        filmID: Number,
+        type: String,
+    }, 
+    mounted() {
+        this.getGenre();
+    },
+    methods: {
+        async getGenre(){
+            this.genre = await this.genresArray()
+        },
+        async genresArray(){
+            const result = await axios.get(`https://api.themoviedb.org/3/${this.type}/${this.filmID}?&api_key=846025be620b599134a99b863faca32c&language=en-US`).then((response) =>{
+                return response.data.genres;
+            });
+            return result
+        }
     },
 }
 </script>
@@ -88,6 +108,16 @@ export default {
             
             span{
                 font-weight: bold;
+            }
+        }
+
+        .genre{
+            font-weight: bold;
+            margin: 15px 0;
+
+            p{
+                font-weight: 400;
+                margin: 5px;
             }
         }
     }

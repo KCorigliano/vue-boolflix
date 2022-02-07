@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <h1>Film consigliati</h1>
+        <h1>Recommended films</h1>
         <div class="row">
             <div @click="prevImage()"><font-awesome-icon class="arrow" icon="chevron-left" /></div>
             <slider 
