@@ -8,7 +8,7 @@
             <p><span>Titolo: </span>{{title}}</p>
             <p v-if="originalTitle != title"><span>Titolo originale: </span>{{originalTitle}}</p>
             <p><span>Lingua: </span><lang-flag :iso="lang" :squared="false"/></p>
-            <p><span>Voto: </span><font-awesome-icon class="vote" icon="star" v-for="(num, i) in starVote" :key="i"/></p>
+            <p><span>Voto: </span><star-vote :vote="vote"/></p>
             <p v-if="!overview"><span>Overview:</span> Descrizione non disponibile</p>
             <p v-else><span>Overview:</span> {{overview}}</p>
         </div>
@@ -16,16 +16,14 @@
 </template>
 
 <script>
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faStar } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import StarVote from './StarVote.vue'
+
 import LangFlag from 'vue-lang-code-flags';
 
-library.add(faStar);
 
 export default {
     components:{
-        FontAwesomeIcon,
+        StarVote,
         LangFlag
     },
     data() {
@@ -41,18 +39,8 @@ export default {
         overview: String,
         background: String,
         lang: String,
-    },mounted() {
-        this.newVote(this.vote);
+        genre: String,
     },
-    methods: {
-        newVote(vote){
-            const fiveVote = Math.round((vote * 5 / 10));
-            for (let i=0; i <= fiveVote; i++){
-                this.starVote.push(fiveVote);
-            }
-        }
-    },
-    
 }
 </script>
 
@@ -100,10 +88,6 @@ export default {
             
             span{
                 font-weight: bold;
-            }
-
-            .vote{
-                color: goldenrod;
             }
         }
     }
