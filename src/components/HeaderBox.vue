@@ -8,7 +8,7 @@
         </div>
         <div>
             <div v-if="searchInputBool">
-                <input type="text" v-model="filmTitle" placeholder="Cerca un film" @keyup.enter="searchFilm">
+                <input type="text" v-model="filmTitle" placeholder="Search a title" @keyup.enter="searchFilm">
                 <button @click="searchFilm">Search</button>
             </div>
             <font-awesome-icon class="search-icon" icon="search" @click="searchInputShow" />

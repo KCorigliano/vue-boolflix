@@ -1,7 +1,7 @@
 <template>
     <div class="card-container" @mouseover="hover=true" @mouseleave="hover=false">
         <div class="background" v-show="!hover">
-            <p v-if="!background">Nessuna immagine</p>
+            <p v-if="!background">Image not avaible</p>
             <img v-else :src="'https://image.tmdb.org/t/p/w500/'+background" alt="">
         </div>
         <div class="text" v-show="hover">
